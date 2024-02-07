@@ -6,10 +6,8 @@ import java.util.stream.LongStream;
 public class Factorial {
 
   public BigInteger compute(long upTo) {
-    return BigInteger.valueOf(
-        LongStream.rangeClosed(1, upTo)
-            .reduce((x, y) -> x * y)
-            .orElse(0)
-    );
+    return LongStream.rangeClosed(1,upTo)
+        .mapToObj(BigInteger::valueOf)
+        .reduce(BigInteger.ONE, BigInteger::multiply);
   }
 }
