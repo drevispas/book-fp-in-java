@@ -6,17 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LeapYearsTest {
+class LeapYearsTest {
 
   LeapYears leapYears;
 
   @BeforeEach
-  public void setUp() {
+  void setUp() {
     leapYears = new LeapYears();
   }
 
   @Test
-  public void countFrom1900() {
+  void countFrom1900() {
     assertAll(
         () -> assertEquals(25, leapYears.countFrom1900(2000)),
         () -> assertEquals(27, leapYears.countFrom1900(2010)),

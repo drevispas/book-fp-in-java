@@ -1,17 +1,14 @@
 package org.example.fpij.refactoring;
 
 import java.time.Year;
+import java.util.stream.IntStream;
 
 public class LeapYears {
 
   public int countFrom1900(int upTo) {
-    int numberOfLeapYears = 0;
-
-    for (int i = 1900; i <= upTo; i += 4) {
-      if (Year.isLeap(i)) {
-        numberOfLeapYears++;
-      }
-    }
-    return numberOfLeapYears;
+    return (int) IntStream.iterate(1900,i->i+4)
+        .filter(Year::isLeap)
+        .takeWhile(i -> i<=upTo)
+        .count();
   }
 }
