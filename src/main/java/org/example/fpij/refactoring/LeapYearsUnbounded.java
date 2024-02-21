@@ -2,6 +2,7 @@ package org.example.fpij.refactoring;
 
 import java.time.Year;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 interface Continue {
 
@@ -11,12 +12,17 @@ interface Continue {
 public class LeapYearsUnbounded {
 
   public int countFrom1900(Continue shouldContinue) {
-    int numberOfLeapYears = 0;
+//    int numberOfLeapYears = 0;
+//
+//    for(int i=1900;;i+=4){
+//      if(!shouldContinue.check(i)) break;
+//      if(Year.isLeap(i)) numberOfLeapYears++;
+//    }
+//    return numberOfLeapYears;
 
-    for(int i=1900;;i+=4){
-      if(!shouldContinue.check(i)) break;
-      if(Year.isLeap(i)) numberOfLeapYears++;
-    }
-    return numberOfLeapYears;
+    return (int) Stream.iterate(1900, x -> x+4)
+        .takeWhile(shouldContinue::check)
+        .filter(Year::isLeap)
+        .count();
   }
 }
