@@ -1,17 +1,18 @@
 package org.example.fpij.refactoring;
 
 import java.time.Year;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-interface Continue {
-
-  Boolean check(int year);
-}
+//interface Continue {
+//
+//  Boolean check(int year);
+//}
 
 public class LeapYearsUnbounded {
 
-  public int countFrom1900(Continue shouldContinue) {
+  public int countFrom1900(Predicate<Integer> shouldContinue) {
 //    int numberOfLeapYears = 0;
 //
 //    for(int i=1900;;i+=4){
@@ -21,7 +22,7 @@ public class LeapYearsUnbounded {
 //    return numberOfLeapYears;
 
     return (int) Stream.iterate(1900, x -> x+4)
-        .takeWhile(shouldContinue::check)
+        .takeWhile(shouldContinue::test)
         .filter(Year::isLeap)
         .count();
   }
