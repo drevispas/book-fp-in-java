@@ -27,7 +27,8 @@ public class CommerceTest {
   public long countSimilarPairs(List<String> words) {
     Map<String, Long> wordCount = new HashMap<>();
     for (String s : words) {
-      Set<Character> compressedWord = s.chars().mapToObj(i -> (char) i).sorted()
+      Set<Character> compressedWord = s.chars()
+          .mapToObj(i -> (char) i).sorted()
           .collect(Collectors.toSet());
       String key = compressedWord.stream().map(String::valueOf).collect(Collectors.joining());
       wordCount.put(key, wordCount.getOrDefault(key, 0L) + 1);
